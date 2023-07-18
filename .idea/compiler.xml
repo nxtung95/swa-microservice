@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="teacher-service" />
+        <module name="config-service" />
+        <module name="avatar-service" />
+        <module name="api-gateway" />
+        <module name="student-service" />
+        <module name="user-service" />
+        <module name="school-service" />
+        <module name="eureka-server" />
+        <module name="reward-service" />
+        <module name="element-service" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="UserService" target="8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="avatar-service" options="" />
+      <module name="config-service" options="" />
+      <module name="element-service" options="" />
+      <module name="eureka-server" options="" />
+      <module name="reward-service" options="" />
+      <module name="school-service" options="" />
+      <module name="student-service" options="" />
+      <module name="teacher-service" options="" />
+      <module name="user-service" options="" />
+    </option>
+  </component>
+</project>
