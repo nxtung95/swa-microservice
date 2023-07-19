@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Getter
 @Setter
 @SuperBuilder(toBuilder = true)
-@Document(collection = "User")
+@Document(collection = "user")
 @NoArgsConstructor
 public class User {
     @Id

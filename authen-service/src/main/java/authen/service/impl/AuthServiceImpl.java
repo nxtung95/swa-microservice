@@ -25,7 +25,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public User login(LoginRequest request) throws JsonProcessingException {
-        Optional<User> optUser = authRepository.findByUsername(request.getUsername());
+        Optional<User> optUser = authRepository.findFirstByUsername(request.getUsername());
         if (!optUser.isPresent()) {
             return null;
         }
