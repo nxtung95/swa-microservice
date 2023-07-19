@@ -10,7 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import user.entity.User;
 import user.object.Teacher;
-import user.service.CommandUserService;
+import user.repository.CommandUserRepository;
 
 import java.util.Objects;
 
@@ -20,7 +20,7 @@ public class UserConsumer {
 	@Autowired
 	private ObjectMapper objectMapper;
 	@Autowired
-	private CommandUserService commandUserService;
+	private CommandUserRepository commandUserRepository;
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	@Autowired
@@ -33,7 +33,7 @@ public class UserConsumer {
 	private String defaultPassword;
 
 	@KafkaListener(topics = "addTeacherTopic", groupId = "SWA_Project_AddTeacher2")
-	public void handlingAddUser(String message) {
+	public void handlingAddUserWhenAddTeacher(String message) {
 		try {
 			log.info("Received Message: " + message);
 			Teacher teacher = objectMapper.readValue(message, Teacher.class);
@@ -42,12 +42,41 @@ public class UserConsumer {
 					.password(passwordEncoder.encode(defaultPassword))
 					.role("Teacher")
 					.build();
-			User newUser = commandUserService.save(user);
+			User newUser = commandUserRepository.save(user);
 			if (!Objects.isNull(newUser)) {
 				log.info("Add user, role teacher success, id: " + newUser.getId());
 				kafkaTemplate.send(teacherEmailTopicName, objectMapper.writeValueAsString(newUser));
 			} else {
 				log.info("Add user, role teacher fail!");
+			}
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+		}
+	}
+
+	@KafkaListener(topics = "userTopic", groupId = "SWA_Project_UserTopic")
+	public void handlingAddUserFromAdmin(String message) {
+		try {
+			log.info("Received Message: " + message);
+			User user = objectMapper.readValue(message, User.class);
+			if (user.getType() == 1) {
+				user.setPassword(passwordEncoder.encode(user.getPassword()));
+				User newUser = commandUserRepository.insert(user);
+				if (!Objects.isNull(newUser)) {
+					log.info("Add user success, id: " + newUser.getId());
+				} else {
+					log.info("Add user fail!");
+				}
+			} else if (user.getType() == 2) {
+				User newUser = commandUserRepository.save(user);
+				if (!Objects.isNull(newUser)) {
+					log.info("Update user success, id: " + newUser.getId());
+				} else {
+					log.info("Update user fail!");
+				}
+			} else if (user.getType() == 3) {
+				commandUserRepository.delete(user);
+				log.info("Delete user success, id: " + user.getId());
 			}
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);

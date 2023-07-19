@@ -25,6 +25,8 @@ public class KafkaConfig {
 	private String addTeacherTopic;
 	@Value(value = "${spring.kafka.teacher.email.topic.name:teacherEmailTopic}")
 	private String teacherEmailTopicName;
+	@Value(value = "${spring.kafka.user.topic.name:userTopic}")
+	private String userTopic;
 	@Value(value = "${spring.kafka.group.id:SWA_Project}")
 	private String groupId;
 
@@ -65,6 +67,10 @@ public class KafkaConfig {
 		return new NewTopic(teacherEmailTopicName, 1, (short) 1);
 	}
 
+	@Bean
+	public NewTopic userTopic() {
+		return new NewTopic(userTopic, 1, (short) 1);
+	}
 
 	@Bean
 	public ConsumerFactory<String, String> consumerFactory() {

@@ -9,59 +9,65 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import user.entity.User;
-import user.service.CommandUserService;
+import user.object.UserRequest;
+import user.object.UserResponse;
+import user.producer.UserProducer;
 
-import java.util.Objects;
+import java.util.UUID;
 
 @RestController
 @RequestMapping(value = "/api/v1")
 @Slf4j
 public class CommandUserController {
     @Autowired
-    private CommandUserService commandUserService;
-    @Autowired
     private ObjectMapper objectMapper;
+    @Autowired
+    private UserProducer userProducer;
 
-    @RequestMapping(value = "/users/", method = RequestMethod.POST)
-    public ResponseEntity<User> add(@RequestBody User user) {
+    @RequestMapping(value = "/users", method = RequestMethod.POST)
+    public ResponseEntity<UserResponse> add(@RequestBody UserRequest user) {
+        UserResponse res = UserResponse.builder().build();
         try {
-            User resUser = commandUserService.save(user);
-            log.info("AddUser: " + objectMapper.writeValueAsString(resUser));
-            if (Objects.isNull(resUser)) {
-                return ResponseEntity.internalServerError().build();
-            }
-            return ResponseEntity.ok(resUser);
+            user.setId(UUID.randomUUID().toString());
+            log.info("AddUser: " + objectMapper.writeValueAsString(user));
+            User userEntity = userProducer.save(user);
+            res.setUser(userEntity);
+            res.setDesc("Success");
+            return ResponseEntity.ok(res);
         } catch (Exception e) {
+            res.setDesc("Error happend");
             log.error(e.getMessage(), e);
             return ResponseEntity.internalServerError().build();
         }
     }
 
-    @RequestMapping(value = "/users/", method = RequestMethod.PUT)
-    public ResponseEntity<User> update(@RequestBody User user) {
+    @RequestMapping(value = "/users", method = RequestMethod.PUT)
+    public ResponseEntity<UserResponse> update(@RequestBody UserRequest user) {
+        UserResponse res = UserResponse.builder().build();
         try {
-            User resUser = commandUserService.update(user);
-            log.info("UpdateUser: " + objectMapper.writeValueAsString(resUser));
-            if (Objects.isNull(resUser)) {
-                return ResponseEntity.internalServerError().build();
-            }
-            return ResponseEntity.ok(resUser);
+            log.info("UpdateUser: " + objectMapper.writeValueAsString(user));
+            User userEntity = userProducer.update(user);
+            res.setUser(userEntity);
+            res.setDesc("Success");
+            return ResponseEntity.ok(res);
         } catch (Exception e) {
+            res.setDesc("Error happend");
             log.error(e.getMessage(), e);
             return ResponseEntity.internalServerError().build();
         }
     }
 
-    @RequestMapping(value = "/users/", method = RequestMethod.DELETE)
-    public ResponseEntity<User> delete(@RequestBody User user) {
+    @RequestMapping(value = "/users", method = RequestMethod.DELETE)
+    public ResponseEntity<UserResponse> delete(@RequestBody UserRequest user) {
+        UserResponse res = UserResponse.builder().build();
         try {
-            commandUserService.delete(user);
             log.info("DeleteUser: " + objectMapper.writeValueAsString(user));
-            if (Objects.isNull(user)) {
-                return ResponseEntity.internalServerError().build();
-            }
-            return ResponseEntity.ok(user);
+            User userEntity = userProducer.delete(user);
+            res.setUser(userEntity);
+            res.setDesc("Success");
+            return ResponseEntity.ok(res);
         } catch (Exception e) {
+            res.setDesc("Error happend");
             log.error(e.getMessage(), e);
             return ResponseEntity.internalServerError().build();
         }
