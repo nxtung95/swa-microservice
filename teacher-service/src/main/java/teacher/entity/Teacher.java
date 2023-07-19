@@ -4,8 +4,10 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+import teacher.object.TeachingClass;
 
 @Getter
 @Setter
@@ -22,5 +24,8 @@ public class Teacher {
     private String phone;
     private String school;
     @Field(name = "teaching_class")
-    private String teachingClass;
+    private TeachingClass teachingClass;
+
+    @Transient
+    private int type;
 }

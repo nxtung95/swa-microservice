@@ -19,4 +19,10 @@ public class QuerySchoolImpl implements QuerySchoolService {
     public School findSchoolById(String id) {
         return querySchoolRepository.findById(id).orElse(null);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public School findSchoolByEmail(String email) {
+        return querySchoolRepository.findByEmail(email).orElse(null);
+    }
 }

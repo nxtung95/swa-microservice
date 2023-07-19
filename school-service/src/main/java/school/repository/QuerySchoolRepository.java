@@ -4,6 +4,9 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 import school.entity.School;
 
+import java.util.Optional;
+
 @Repository
 public interface QuerySchoolRepository extends MongoRepository<School, String> {
+	Optional<School> findByEmail(String email);
 }

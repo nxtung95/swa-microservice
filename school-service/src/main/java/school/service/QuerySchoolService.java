@@ -4,4 +4,6 @@ import school.entity.School;
 
 public interface QuerySchoolService {
     School findSchoolById(String id);
+
+    School findSchoolByEmail(String email);
 }

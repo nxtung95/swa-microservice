@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Getter
 @Setter
 @SuperBuilder(toBuilder = true)
-@Document(collection = "User")
+@Document(collection = "user")
 public class User {
     @Id
     private String id;
