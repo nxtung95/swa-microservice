@@ -4,12 +4,6 @@
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-<!--	<parent>-->
-<!--		<artifactId>spring-boot-starter-parent</artifactId>-->
-<!--		<groupId>org.springframework.boot</groupId>-->
-<!--		<version>2.6.1</version>-->
-<!--	</parent>-->
-
 	<groupId>org.example</groupId>
 	<artifactId>SWA_Project</artifactId>
 	<packaging>pom</packaging>
@@ -25,7 +19,8 @@
 		<module>config-service</module>
 		<module>eureka-server</module>
 		<module>api-gateway</module>
-	</modules>
+        <module>authen-service</module>
+    </modules>
 
 	<dependencyManagement>
 		<dependencies>
@@ -33,6 +28,12 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-starter-web</artifactId>
 				<version>${spring-boot.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.springframework.boot</groupId>
+						<artifactId>spring-boot-starter-logging</artifactId>
+					</exclusion>
+				</exclusions>
 			</dependency>
 
 			<dependency>
@@ -89,6 +90,18 @@
 				<groupId>org.springframework.cloud</groupId>
 				<artifactId>spring-cloud-starter-sleuth</artifactId>
 				<version>${spring-sleuth-version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-data-mongodb</artifactId>
+				<version>${spring-boot.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>io.jsonwebtoken</groupId>
+				<artifactId>jjwt</artifactId>
+				<version>0.9.1</version>
 			</dependency>
 
 			<dependency>

@@ -24,6 +24,8 @@ public class ApiGatewayConfig {
 						.uri("lb://TEACHER-SERVICE"))
 				.route("USER-SERVICE", r -> r.path("/user-service/**")
 						.uri("lb://USER-SERVICE"))
+				.route("AUTHEN-SERVICE", r -> r.path("/authen-service/**")
+						.uri("lb://AUTHEN-SERVICE"))
 				.build();
 	}
 }
