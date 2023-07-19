@@ -18,7 +18,7 @@ public class TeacherConsumer {
 	@Autowired
 	private CommandTeacherRepository teacherRepository;
 
-	@KafkaListener(topics = "addTeacherTopic", groupId = "SWA_Project")
+	@KafkaListener(topics = "addTeacherTopic", groupId = "SWA_Project_AddTeacher1")
 	public void handlingAddTeacher(String message) {
 		try {
 			log.info("Received Message: " + message);

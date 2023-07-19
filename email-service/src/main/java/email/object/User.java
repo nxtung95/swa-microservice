@@ -1,20 +1,17 @@
-package user.entity;
+package email.object;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Transient;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 @Getter
 @Setter
 @SuperBuilder(toBuilder = true)
-@Document(collection = "user")
+@AllArgsConstructor
 @NoArgsConstructor
 public class User {
-    @Id
     private String id;
     private String username;
     private String password;

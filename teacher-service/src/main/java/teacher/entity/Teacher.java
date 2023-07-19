@@ -1,6 +1,7 @@
 package teacher.entity;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.springframework.data.annotation.Id;
@@ -12,7 +13,8 @@ import teacher.object.TeachingClass;
 @Getter
 @Setter
 @SuperBuilder(toBuilder = true)
-@Document(collection = "Teacher")
+@Document(collection = "teacher")
+@NoArgsConstructor
 public class Teacher {
     @Id
     private String id;

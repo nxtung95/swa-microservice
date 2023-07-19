@@ -20,7 +20,8 @@
 		<module>eureka-server</module>
 		<module>api-gateway</module>
         <module>authen-service</module>
-    </modules>
+		<module>email-service</module>
+	</modules>
 
 	<dependencyManagement>
 		<dependencies>
