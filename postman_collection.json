@@ -1,0 +1,644 @@
+{
+	"info": {
+		"_postman_id": "b8be290e-4b34-48a1-9867-b9e29926a2f2",
+		"name": "Upwork",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "ApacheCFX Demo API",
+			"item": [
+				{
+					"name": "Health check",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"apiKey\": \"123\",\r\n    \"userKey\": \"123\",\r\n    \"softwareDesc\": \"Windows\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get bookings",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "securityToken",
+								"value": "123",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"filter\": [\r\n        {\r\n            \"field\": \"idGRMED\",\r\n            \"operator\": \"=\",\r\n            \"value\": \"1\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/booking?startTime=20220615080000&endTime=20220715080000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"booking"
+							],
+							"query": [
+								{
+									"key": "startTime",
+									"value": "20220615080000"
+								},
+								{
+									"key": "endTime",
+									"value": "20220715080000"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "HelloWorld SOAP",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SWA-Microservice",
+			"item": [
+				{
+					"name": "School",
+					"item": [
+						{
+							"name": "Add school",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"School 1\",\r\n    \"address\": \"Address 1\",\r\n    \"email\": \"email1@gmail.com\",\r\n    \"phone\": \"0912343543\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:9000/school-service/api/v1/schools",
+									"host": [
+										"localhost"
+									],
+									"port": "9000",
+									"path": [
+										"school-service",
+										"api",
+										"v1",
+										"schools"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update school",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"School 1\",\r\n    \"address\": \"Address 1\",\r\n    \"email\": \"email1@gmail.com\",\r\n    \"phone\": \"0912343543\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:9000/school-service/api/v1/schools",
+									"host": [
+										"localhost"
+									],
+									"port": "9000",
+									"path": [
+										"school-service",
+										"api",
+										"v1",
+										"schools"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete school",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": \"dd702236-aba1-43eb-b4ea-43225cc04d77\",       \r\n    \"name\": \"School 1\",\r\n    \"address\": \"Address 1\",\r\n    \"email\": \"email1@gmail.com\",\r\n    \"phone\": \"0912343543\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:9000/school-service/api/v1/schools",
+									"host": [
+										"localhost"
+									],
+									"port": "9000",
+									"path": [
+										"school-service",
+										"api",
+										"v1",
+										"schools"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "View School",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:9000/school-service/api/v1/schools/6fd9adc4-86da-4eb7-a8cc-07ed073c02d3",
+									"host": [
+										"localhost"
+									],
+									"port": "9000",
+									"path": [
+										"school-service",
+										"api",
+										"v1",
+										"schools",
+										"6fd9adc4-86da-4eb7-a8cc-07ed073c02d3"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Teacher",
+					"item": [
+						{
+							"name": "Add teacher",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"firstName\": \"first_name_1\",\r\n\t\"lastName\": \"last_name_1\",\r\n\t\"email\": \"teacher1@gmail.com\",\r\n\t\"phone\": \"0912354354\",\r\n\t\"school\": \"School_1\",\r\n    \"teachingClass\": {\r\n        \"year\": 2023,\r\n        \"group\": \"A\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:9000/teacher-service/api/v1/teachers",
+									"host": [
+										"localhost"
+									],
+									"port": "9000",
+									"path": [
+										"teacher-service",
+										"api",
+										"v1",
+										"teachers"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update teacher",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": \"\",\r\n\t\"firstName\": \"first_name_1\",\r\n\t\"lastName\": \"last_name_1\",\r\n\t\"email\": \"teacher1@gmail.com\",\r\n\t\"phone\": \"0912354354\",\r\n\t\"school\": \"School_1\",\r\n    \"teachingClass\": {\r\n        \"year\": 2023,\r\n        \"group\": \"A\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:9000/teacher-service/api/v1/teachers",
+									"host": [
+										"localhost"
+									],
+									"port": "9000",
+									"path": [
+										"teacher-service",
+										"api",
+										"v1",
+										"teachers"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete teacher",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": \"\",\r\n\t\"firstName\": \"first_name_1\",\r\n\t\"lastName\": \"last_name_1\",\r\n\t\"email\": \"teacher1@gmail.com\",\r\n\t\"phone\": \"0912354354\",\r\n\t\"school\": \"School_1\",\r\n    \"teachingClass\": {\r\n        \"year\": 2023,\r\n        \"group\": \"A\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:9000/teacher-service/api/v1/teachers",
+									"host": [
+										"localhost"
+									],
+									"port": "9000",
+									"path": [
+										"teacher-service",
+										"api",
+										"v1",
+										"teachers"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "View Teacher",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:9000/teacher-service/api/v1/teachers/6fd9adc4-86da-4eb7-a8cc-07ed073c02d3",
+									"host": [
+										"localhost"
+									],
+									"port": "9000",
+									"path": [
+										"teacher-service",
+										"api",
+										"v1",
+										"teachers",
+										"6fd9adc4-86da-4eb7-a8cc-07ed073c02d3"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "User",
+					"item": [
+						{
+							"name": "Add user",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"firstName\": \"first_name_1\",\r\n\t\"lastName\": \"last_name_1\",\r\n\t\"email\": \"teacher1@gmail.com\",\r\n\t\"phone\": \"0912354354\",\r\n\t\"school\": \"School_1\",\r\n    \"teachingClass\": {\r\n        \"year\": 2023,\r\n        \"group\": \"A\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:9000/user-service/api/v1/users",
+									"host": [
+										"localhost"
+									],
+									"port": "9000",
+									"path": [
+										"user-service",
+										"api",
+										"v1",
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update user",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": \"\",\r\n\t\"firstName\": \"first_name_1\",\r\n\t\"lastName\": \"last_name_1\",\r\n\t\"email\": \"teacher1@gmail.com\",\r\n\t\"phone\": \"0912354354\",\r\n\t\"school\": \"School_1\",\r\n    \"teachingClass\": {\r\n        \"year\": 2023,\r\n        \"group\": \"A\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:9000/user-service/api/v1/users",
+									"host": [
+										"localhost"
+									],
+									"port": "9000",
+									"path": [
+										"user-service",
+										"api",
+										"v1",
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete user",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": \"97721375-f1b4-4b96-97f2-0349bd1e7c07\",\r\n    \"username\": \"admin1@gmail.com\",\r\n    \"password\": \"test1234\",\r\n    \"role\": \"Admin\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:9000/user-service/api/v1/users",
+									"host": [
+										"localhost"
+									],
+									"port": "9000",
+									"path": [
+										"user-service",
+										"api",
+										"v1",
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "View User",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{access_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:9000/user-service/api/v1/users/97721375-f1b4-4b96-97f2-0349bd1e7c07",
+									"host": [
+										"localhost"
+									],
+									"port": "9000",
+									"path": [
+										"user-service",
+										"api",
+										"v1",
+										"users",
+										"97721375-f1b4-4b96-97f2-0349bd1e7c07"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonResponse = pm.response.json();\r",
+									"pm.globals.set(\"access_token\", jsonResponse.token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"test1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9000/authen-service/api/v1/login",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"authen-service",
+								"api",
+								"v1",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
