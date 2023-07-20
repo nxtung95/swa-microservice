@@ -19,7 +19,7 @@ public class ElementConsumer {
 	private CommandElementRepository elementRepository;
 
 	@KafkaListener(topics = "elementTopic", groupId = "SWA_Project")
-	public void handlingSchool(String message) {
+	public void handlingElement(String message) {
 		try {
 			log.info("Received Message: " + message);
 			Element element = objectMapper.readValue(message, Element.class);

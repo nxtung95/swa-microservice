@@ -32,7 +32,7 @@ public class QueryElementController {
             Element element = queryElementService.findElementById(id);
             log.info("ViewElement: " + objectMapper.writeValueAsString(element));
             if (Objects.isNull(element)) {
-                return ResponseEntity.internalServerError().build();
+                return ResponseEntity.ok().build();
             }
             return ResponseEntity.ok(element);
         } catch (Exception e) {
