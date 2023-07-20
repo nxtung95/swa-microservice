@@ -7,17 +7,18 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="teacher-service" />
         <module name="config-service" />
         <module name="avatar-service" />
+        <module name="user-service" />
+        <module name="client-application" />
+        <module name="school-service" />
+        <module name="eureka-server" />
+        <module name="reward-service" />
+        <module name="teacher-service" />
         <module name="authen-service" />
         <module name="email-service" />
         <module name="api-gateway" />
         <module name="student-service" />
-        <module name="user-service" />
-        <module name="school-service" />
-        <module name="eureka-server" />
-        <module name="reward-service" />
         <module name="element-service" />
       </profile>
     </annotationProcessing>

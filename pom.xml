@@ -21,6 +21,7 @@
 		<module>api-gateway</module>
         <module>authen-service</module>
 		<module>email-service</module>
+		<module>client-application</module>
 	</modules>
 
 	<dependencyManagement>

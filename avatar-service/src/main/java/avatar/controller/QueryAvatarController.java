@@ -1,9 +1,9 @@
 package avatar.controller;
 
+import avatar.entity.Avatar;
+import avatar.service.QueryAvatarService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Strings;
-import element.entity.Element;
-import element.service.QueryElementService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,22 +19,22 @@ import java.util.Objects;
 @Slf4j
 public class QueryAvatarController {
     @Autowired
-    private QueryElementService queryElementService;
+    private QueryAvatarService queryAvatarService;
     @Autowired
     private ObjectMapper objectMapper;
 
-    @RequestMapping(value = "/elements/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Element> view(@PathVariable(value = "id") String id) {
+    @RequestMapping(value = "/avatars/{id}", method = RequestMethod.GET)
+    public ResponseEntity<Avatar> view(@PathVariable(value = "id") String id) {
         if (Strings.isNullOrEmpty(id)) {
             return ResponseEntity.badRequest().build();
         }
         try {
-            Element element = queryElementService.findElementById(id);
-            log.info("ViewElement: " + objectMapper.writeValueAsString(element));
-            if (Objects.isNull(element)) {
+            Avatar avatar = queryAvatarService.findAvatarById(id);
+            log.info("ViewAvatar: " + objectMapper.writeValueAsString(avatar));
+            if (Objects.isNull(avatar)) {
                 return ResponseEntity.ok().build();
             }
-            return ResponseEntity.ok(element);
+            return ResponseEntity.ok(avatar);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             return ResponseEntity.internalServerError().build();
