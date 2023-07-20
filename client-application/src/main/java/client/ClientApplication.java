@@ -117,8 +117,9 @@ public class ClientApplication {
         System.out.println("--------- START DELETE Student -----------------------");
         studentRequest.setFirstName("changefirstName");
         studentRequest.setLastName("changeLastname");
-        HttpEntity<StudentRequest> deleteRq = new HttpEntity<>(studentRequest, headers);
-        StudentResponse deleteRes = restTemplate.exchange(API_GATEWAY + "/student-service/api/v1/students", HttpMethod.DELETE, deleteRq, StudentResponse.class).getBody();
+        HttpEntity<String> deleteRq = new HttpEntity<>(headers);
+//        restTemplate.getRequestFactory().
+        StudentResponse deleteRes = restTemplate.exchange(API_GATEWAY + "/student-service/api/v1/students/" + studentResponse.getStudent().getId(), HttpMethod.DELETE, deleteRq, StudentResponse.class).getBody();
         System.out.println("Response : " + objectMapper.writeValueAsString(deleteRes));
         System.out.println("--------- END DELETE Student -----------------------");
     }

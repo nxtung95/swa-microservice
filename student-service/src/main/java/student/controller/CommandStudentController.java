@@ -5,10 +5,7 @@ import com.google.common.base.Strings;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import student.entity.Student;
 import student.object.*;
 import student.producer.StudentProducer;
@@ -61,11 +58,13 @@ public class CommandStudentController {
         }
     }
 
-    @RequestMapping(value = "/students", method = RequestMethod.DELETE)
-    public ResponseEntity<StudentResponse> delete(@RequestBody StudentRequest student) {
+    @RequestMapping(value = "/students/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<StudentResponse> delete(@PathVariable(value = "id") String id) {
         StudentResponse res = StudentResponse.builder().build();
         try {
-            log.info("DeleteStudent: " + objectMapper.writeValueAsString(student));
+            log.info("DeleteStudent: " + id);
+            StudentRequest student = new StudentRequest();
+            student.setId(id);
             Student s = studentProducer.delete(student);
             res.setDesc("Success");
             res.setStudent(s);
