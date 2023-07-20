@@ -13,7 +13,7 @@ public class EmailServiceConsumer {
 	@Autowired
 	private ObjectMapper objectMapper;
 
-	@KafkaListener(topics = "teacherEmailTopic", groupId = "SWA_Project_SendMail")
+	@KafkaListener(topics = {"teacherEmailTopic", "studentEmailTopic"}, groupId = "SWA_Project_SendMail")
 	public void sendMailToTeacher(String message) {
 		try {
 			log.info("Received Message: " + message);

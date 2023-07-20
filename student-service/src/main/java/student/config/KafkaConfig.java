@@ -1,4 +1,4 @@
-package user.config;
+package student.config;
 
 import org.apache.kafka.clients.admin.AdminClientConfig;
 import org.apache.kafka.clients.admin.NewTopic;
@@ -21,16 +21,16 @@ import java.util.Map;
 public class KafkaConfig {
 	@Value(value = "${spring.kafka.bootstrap-servers:localhost:9092}")
 	private String bootstrapAddress;
-	@Value(value = "${spring.kafka.add.teacher.topic.name:addTeacherTopic}")
-	private String addTeacherTopic;
-	@Value(value = "${spring.kafka.teacher.email.topic.name:teacherEmailTopic}")
-	private String teacherEmailTopicName;
+	@Value(value = "${spring.kafka.student.topic.name:studentTopic}")
+	private String topicName;
 	@Value(value = "${spring.kafka.add.student.topic.name:addStudentTopic}")
 	private String addStudentTopic;
-	@Value(value = "${spring.kafka.student.email.topic.name:studentEmailTopic}")
-	private String studentEmailTopic;
-	@Value(value = "${spring.kafka.user.topic.name:userTopic}")
-	private String userTopic;
+	@Value(value = "${spring.kafka.buy.element.student.topic.name:buyElementTopic}")
+	private String buyElementTopic;
+	@Value(value = "${spring.kafka.remove.element.student.topic.name:removeElementTopic}")
+	private String removeElementTopic;
+	@Value(value = "${spring.kafka.buy.reward.student.topic.name:buyRewardTopic}")
+	private String buyRewardTopic;
 	@Value(value = "${spring.kafka.group.id:SWA_Project}")
 	private String groupId;
 
@@ -39,6 +39,30 @@ public class KafkaConfig {
 		Map<String, Object> configs = new HashMap<>();
 		configs.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
 		return new KafkaAdmin(configs);
+	}
+	@Bean
+	public NewTopic buyRewardTopic() {
+		return new NewTopic(buyRewardTopic, 1, (short) 1);
+	}
+
+	@Bean
+	public NewTopic removeElementTopic() {
+		return new NewTopic(removeElementTopic, 1, (short) 1);
+	}
+
+	@Bean
+	public NewTopic buyElementTopic() {
+		return new NewTopic(buyElementTopic, 1, (short) 1);
+	}
+
+	@Bean
+	public NewTopic addStudentTopic() {
+		return new NewTopic(addStudentTopic, 1, (short) 1);
+	}
+
+	@Bean
+	public NewTopic studentTopic() {
+		return new NewTopic(topicName, 1, (short) 1);
 	}
 
 	@Bean
@@ -59,31 +83,6 @@ public class KafkaConfig {
 	@Bean
 	public KafkaTemplate<String, String> kafkaTemplate() {
 		return new KafkaTemplate<>(producerFactory());
-	}
-
-	@Bean
-	public NewTopic addTeacherTopic() {
-		return new NewTopic(addTeacherTopic, 1, (short) 1);
-	}
-
-	@Bean
-	public NewTopic teacherEmailTopic() {
-		return new NewTopic(teacherEmailTopicName, 1, (short) 1);
-	}
-
-	@Bean
-	public NewTopic addStudentTopic() {
-		return new NewTopic(addStudentTopic, 1, (short) 1);
-	}
-
-	@Bean
-	public NewTopic studentEmailTopic() {
-		return new NewTopic(studentEmailTopic, 1, (short) 1);
-	}
-
-	@Bean
-	public NewTopic userTopic() {
-		return new NewTopic(userTopic, 1, (short) 1);
 	}
 
 	@Bean

@@ -1,16 +1,25 @@
 package student.entity;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+import student.object.Avatar;
+import student.object.Reward;
+import student.object.School;
+import student.object.StudentClass;
+
+import java.util.List;
 
 @Getter
 @Setter
 @SuperBuilder(toBuilder = true)
-@Document(collection = "Student")
+@Document(collection = "student")
+@NoArgsConstructor
 public class Student {
     @Id
     private String id;
@@ -20,10 +29,13 @@ public class Student {
     private String lastName;
     @Field(name = "student_number")
     private int studentNumber;
-    private String school;
+    private School school;
     @Field(name = "class")
-    private String classStudent;
+    private StudentClass classStudent;
     private int score;
-    private String avatar;
-    private String rewards;
+    private Avatar avatar;
+    private List<Reward> rewards;
+
+    @Transient
+    private int type;
 }

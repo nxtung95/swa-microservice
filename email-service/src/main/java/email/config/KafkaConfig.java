@@ -21,12 +21,19 @@ public class KafkaConfig {
 	private String bootstrapAddress;
 	@Value(value = "${spring.kafka.teacher.email.topic.name:teacherEmailTopic}")
 	private String teacherEmailTopicName;
+	@Value(value = "${spring.kafka.student.email.topic.name:studentEmailTopic}")
+	private String studentEmailTopic;
 	@Value(value = "${spring.kafka.group.id:SWA_Project}")
 	private String groupId;
 
 	@Bean
 	public NewTopic teacherEmailTopic() {
 		return new NewTopic(teacherEmailTopicName, 1, (short) 1);
+	}
+
+	@Bean
+	public NewTopic studentEmailTopic() {
+		return new NewTopic(studentEmailTopic, 1, (short) 1);
 	}
 
 

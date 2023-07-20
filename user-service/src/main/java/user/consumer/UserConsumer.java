@@ -9,6 +9,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import user.entity.User;
+import user.object.Student;
 import user.object.Teacher;
 import user.repository.CommandUserRepository;
 
@@ -29,6 +30,9 @@ public class UserConsumer {
 	@Value(value = "${spring.kafka.teacher.email.topic.name:teacherEmailTopic}")
 	private String teacherEmailTopicName;
 
+	@Value(value = "${spring.kafka.student.email.topic.name:studentEmailTopic}")
+	private String studentEmailTopic;
+
 	@Value(value = "${user.default.password:test1234}")
 	private String defaultPassword;
 
@@ -48,6 +52,28 @@ public class UserConsumer {
 				kafkaTemplate.send(teacherEmailTopicName, objectMapper.writeValueAsString(newUser));
 			} else {
 				log.info("Add user, role teacher fail!");
+			}
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+		}
+	}
+
+	@KafkaListener(topics = "addStudentTopic", groupId = "SWA_Project_AddStudent2")
+	public void handlingAddUserWhenAddStudent(String message) {
+		try {
+			log.info("Received Message: " + message);
+			Student student = objectMapper.readValue(message, Student.class);
+			User user = User.builder()
+					.username(student.getLastName() + student.getFirstName() + "@gmail.com")
+					.password(passwordEncoder.encode(defaultPassword))
+					.role("Student")
+					.build();
+			User newUser = commandUserRepository.save(user);
+			if (!Objects.isNull(newUser)) {
+				log.info("Add user, role student success, id: " + newUser.getId());
+				kafkaTemplate.send(studentEmailTopic, objectMapper.writeValueAsString(newUser));
+			} else {
+				log.info("Add user, role student fail!");
 			}
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
